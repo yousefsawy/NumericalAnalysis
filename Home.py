@@ -693,7 +693,7 @@ class Ui_MainWindow(object):
         self.label_9.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Start:</span></p><p><br/></p><p><span style=\" font-size:16pt;\"><br/></span></p></body></html>"))
         self.label_10.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Stop:</span></p><p><br/></p><p><span style=\" font-size:16pt;\"><br/></span></p></body></html>"))
         self.label_11.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Step:</span></p><p><br/></p><p><span style=\" font-size:16pt;\"><br/></span></p></body></html>"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Page"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Function Verifier"))
         self.pushButton.setText(_translate("MainWindow", "Numerical Analsysis - Fall 2023"))
 from mplwidget import MplWidget
 

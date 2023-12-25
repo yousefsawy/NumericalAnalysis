@@ -889,7 +889,7 @@ QStackedWidget::widget:hover {
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Page</string>
+      <string>Function Verifier</string>
      </attribute>
      <widget class="QLabel" name="label_5">
       <property name="geometry">
