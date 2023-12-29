@@ -54,9 +54,6 @@ class MainWindow(QMainWindow):
         self.plot_data(func,start,stop,step)
 
 
-
-
-
     def OpenHome(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -64,13 +61,9 @@ class MainWindow(QMainWindow):
     def show_warning_messagebox(self, message):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Warning)
-
         msg.setText(message)
-
         msg.setWindowTitle("Wrong Input")
-
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-
         retval = msg.exec_()
 
     def plot_data(self,func,start,end,step):
@@ -80,12 +73,9 @@ class MainWindow(QMainWindow):
         for i in range(start, end, step):
                 y.append(func(i))
                 x.append(i)
-
         self.figure.clear()
-
         ax = self.figure.add_subplot(111)
         ax.plot(x, y)
-
         self.canvas.draw()
 
 
