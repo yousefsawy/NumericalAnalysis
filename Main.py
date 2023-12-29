@@ -16,8 +16,6 @@ class MainWindow(QMainWindow):
 
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-        self.ui.pushButton_24.clicked.connect(Linear)
-
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
 
     def VerifyFunc(self):

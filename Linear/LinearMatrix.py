@@ -4,11 +4,11 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QTa
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from Linear.linear import Ui_Widget
-from Linear.linear_logic import func
+from linear import Ui_Widget
+from linear_logic import func
 
 
-class LinearMatrix(QMainWindow):
+class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -33,6 +33,8 @@ class LinearMatrix(QMainWindow):
     def ValidateInputN(self):
         try:
             self.N = int(self.ui.lineEdit.text())
+            if (self.iterations<1):
+                raise Exception("N should be a positive integer")
         except:
             self.show_warning_messagebox('N should be an integer')
             return
@@ -70,7 +72,6 @@ class LinearMatrix(QMainWindow):
             for row in range(self.N):
                 OneRow = []
                 for col in range(self.N + 1):
-                    print(self.ui.tableWidget.item(row, col).text())
                     OneRow.append(float(self.ui.tableWidget.item(row, col).text()))
                 self.matrix.append(OneRow)
         except:
@@ -82,7 +83,6 @@ class LinearMatrix(QMainWindow):
         try:
             for col in range(self.N):
                 self.vector[col]=(float(self.ui.tableWidget.item(0, col).text()))
-                print(self.vector[col])
         except:
             self.show_warning_messagebox('Invalid Vector Input')
             return
@@ -99,6 +99,8 @@ class LinearMatrix(QMainWindow):
     def ValidateIterations(self):
         try:
             self.iterations = int(self.ui.lineEdit_2.text())
+            if (self.iterations<1):
+                raise Exception("Iterations No. should be a positive integer")
         except:
             self.show_warning_messagebox('iterations number should be an integer')
             return
@@ -113,8 +115,6 @@ class LinearMatrix(QMainWindow):
     def executeFunc(self):
         self.ValidateInput()
         self.error=[0] * self.N
-        print (self.matrix)
-        print (self.vector)
         self.finalVect= func(self.N, self.vector, self.matrix, self.iterations, self.w, self.error)
         self.ShowFinalVect()
         self.ShowFinalErrors()
@@ -149,9 +149,11 @@ class LinearMatrix(QMainWindow):
 
 
     
-    def Linear():
-        window = LinearMatrix()
-        window.show()
+def Linear():
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
 
-    if __name__ == '__main__':
-        Linear()
+if __name__ == '__main__':
+    Linear()
