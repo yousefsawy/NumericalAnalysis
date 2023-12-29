@@ -11,6 +11,7 @@ from RK_Logic import Runge_Kutta
 
 
 class RK_UI(QMainWindow):
+
     def __init__(self):
         super().__init__()
         self.OpenRK()
@@ -26,6 +27,12 @@ class RK_UI(QMainWindow):
         self.ui.lineEdit_10.setStyleSheet("background-color: rgb(82, 90, 100);")
         self.ui.lineEdit_4.setStyleSheet("background-color: rgb(82, 90, 100);")
         self.ui.lineEdit_12.setStyleSheet("background-color: rgb(82, 90, 100);")
+
+    def OpenRKMain(self):
+        self.RK_window = QtWidgets.QMainWindow
+        self.RK_window_UI = Ui_Widget()
+        self.RK_window_UI.setupUi(self.RK_window)
+        self.RK_window.show()
 
     def EnableSecond(self):
         self.ui.lineEdit_10.setEnabled(True)
@@ -66,7 +73,7 @@ class RK_UI(QMainWindow):
         for col in range(self.N+1):
             item = QTableWidgetItem('')
             self.ui.tableWidget_7.setItem(0, col, item)
-            self.ui.tableWidget_7.setColumnWidth(col, int(250/(self.N)))
+            self.ui.tableWidget_7.setColumnWidth(col, int(250/(self.N+1)))
 
     def ValidateVectorInput(self):
         self.vector = [0]*(self.N+1)
@@ -105,7 +112,7 @@ class RK_UI(QMainWindow):
         self.ValidateVectorInput()
         self.ValidateX1()
         y,True_Error = Runge_Kutta(self.func, self.exact, self.X1, self.vector)
-        self.ui.lineEdit_11.setText(str(y[2]))
+        self.ui.lineEdit_11.setText(str(y[0]))
         if (self.N==2):
             self.ui.lineEdit_12.setText(str(y[1]))
         self.ui.lineEdit_13.setText(str(True_Error[0]))
