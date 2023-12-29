@@ -4,11 +4,11 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QTa
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from linear import Ui_Widget
-from linear_logic import func
+from Linear.linear import Ui_Widget
+from Linear.linear_logic import func
 
 
-class MainWindow(QMainWindow):
+class LinearMatrix(QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -149,11 +149,9 @@ class MainWindow(QMainWindow):
 
 
     
-def main():
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    app.exec_()
+    def Linear():
+        window = LinearMatrix()
+        window.show()
 
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        Linear()

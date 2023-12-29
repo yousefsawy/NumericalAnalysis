@@ -6,6 +6,7 @@ from matplotlib.figure import Figure
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
 import math
+from Linear.LinearMatrix import Linear
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -15,7 +16,7 @@ class MainWindow(QMainWindow):
 
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-
+        self.ui.pushButton_24.clicked.connect(Linear)
 
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
 
