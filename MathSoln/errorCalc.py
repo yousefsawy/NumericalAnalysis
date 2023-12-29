@@ -5,7 +5,6 @@ def get_delta(data):
 
 def get_error(a, b, Ys):
     delta = Ys
-
     if len(Ys) < 5:
         return 0
     else:
@@ -13,7 +12,5 @@ def get_error(a, b, Ys):
             delta = get_delta(delta)
 
     sum_delta4 = sum(delta)
-
     error = ((sum_delta4 / len(delta)) * (b - a)) / 6480
-
     return error*-1

@@ -5,16 +5,11 @@ from scipy.integrate import quad
 import math
 import MathSoln.errorCalc as errorCalc
 
-
 def str2func(func):
-
-        # Transforms the string to a mathematical function
-
-     func = sp.sympify(func)
-     
-
-     # Return a lambda function that evaluates the sympy function
-     return func
+    # Transforms the string to a mathematical function
+    func = sp.sympify(func)
+    # Return a lambda function that evaluates the sympy function
+    return func
 
 def simpsons_3_8_rule(f, a, b, n, mode):
     func = f
@@ -35,7 +30,6 @@ def simpsons_3_8_rule(f, a, b, n, mode):
     integral *= (3 * h / 8)
 
     if mode == 1:
-        
         z = sp.symbols('x')
         third_derivative = sp.diff(func, z, 3)
         fourth_derivative = (third_derivative.subs(z, x[-1]) - third_derivative.subs(z, x[0])) / (x[-1] - x[0])
