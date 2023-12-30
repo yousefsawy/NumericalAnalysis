@@ -17,7 +17,7 @@ from Eigen import EigenForm
 import math
 from Newton_Equi import Newton_Equi_Form
 from newton_general import newton_general_Form
-
+from finit2 import Finite_Form
 import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
 from Simpsons13MainWindow import Ui_Simpsons13
@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         self.OpenHome()
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-
+        
         self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_12.clicked.connect(self.OpenRich)
@@ -50,6 +50,7 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.openCurveFitting)
         self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
         self.ui.pushButton_48.clicked.connect(self.openEigenProblem)
+        self.ui.pushButton_11.clicked.connect(self.OpenFinite)
     
     def openEigenProblem(self):
         self.eigen_form = EigenForm()
@@ -93,6 +94,12 @@ class MainWindow(QMainWindow):
         self.NewtonEquiUI = Newton_Equi_Form()
         self.NewtonEquiUI.setupUi(self.NewtonEquiWindow)
         self.NewtonEquiWindow.show()      
+
+    def OpenFinite(self):
+        self.FiniteWindow = QtWidgets.QMainWindow()
+        self.FiniteUI = Finite_Form()
+        self.FiniteUI.setupUi(self.FiniteWindow)
+        self.FiniteWindow.show()
 
     def VerifyFunc(self):
         start = self.ui.textEdit_3.toPlainText()
