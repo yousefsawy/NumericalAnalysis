@@ -132,10 +132,6 @@ def fixed_point_2var(user_equation1, user_equation2, start_x = 0, start_y = 0, i
 
     except Exception as e:
         print(f"Error: {e}")
-    p1 = plot_implicit(eqn1_sym , show=False, line_color='blue', legend=True, x_value = x, y_value = y)
-    p2 = plot_implicit(eqn2_sym , show=False, line_color='red', legend=True, x_value = x, y_value = y)
-    p1.extend(p2)
-    p1.show() 
 
     return x_val, y_val, err_rel_x, err_rel_y, conv_F, conv_G
 
@@ -224,8 +220,6 @@ def fixed_point_1var(user_equation, start_x = 0, iterations = 100, stopping_erro
 
     except Exception as e:
         print(f"Error: {e}")
-    p1 = plot_implicit(eqn_sym , show=False, line_color='blue', legend=True, x_value = x)
-    p1.show() 
     return x_val, err_rel_x, conv_F
 
 def fixed_point_main(user_equation1, user_equation2, start_x = 0, start_y = 0, iterations = 100,stopping_error = 0, use_iter = True, use_one_var = False):
@@ -244,7 +238,7 @@ def fixed_point_main(user_equation1, user_equation2, start_x = 0, start_y = 0, i
         output_func = fixed_point_1var(user_equation1, start_x, iterations, stopping_error, use_iter)
     else:
         output_func = fixed_point_2var(user_equation1,user_equation2, start_x, start_y,iterations, stopping_error, use_iter)
-
+    plot_eqn(user_equation1, user_equation2, use_one_var)
     return output_func
 
 def plot_eqn(user_equation1, user_equation2, use_one_var = False):
