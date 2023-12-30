@@ -3,8 +3,9 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from Home import Ui_MainWindow
 from RichardsonExp import RichardsonExp_Control
-
-
+from Predictor import Ui_Predictor
+from DifferentialEqn import DifferentialEquationSolver
+from Lagrange_with_graph import LagrangeInterpolationCalculator
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -17,7 +18,21 @@ class MainWindow(QMainWindow):
         self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_12.clicked.connect(self.OpenRich)
+        self.ui.pushButton_28.clicked.connect(self.OpenPredictor)
+        self.ui.pushButton_4.clicked.connect(self.OpenLagrange)
+    def OpenPredictor(self):
+        self.predict_window = QtWidgets.QMainWindow()
+        self.predict_Ui = Ui_Predictor()
+        self.predict_Ui.setupUi(self.predict_window)
+        self.predict_window.show()
 
+    def OpenDiff(self):
+        self.diff_window = DifferentialEquationSolver()
+        self.diff_window.show()
+
+    def OpenLagrange(self):
+        self.Lagrange_window = LagrangeInterpolationCalculator()
+        self.Lagrange_window.show()
     def OpenRich(self):
         self.rich_control.OpenRich()
     def VerifyFunc(self):
