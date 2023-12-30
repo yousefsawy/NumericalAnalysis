@@ -130,15 +130,17 @@ class Eigen(QMainWindow):
     def executeFunc(self):
         self.ValidateInput()
         self.defMatrix=[]
-        self.ChooseFunc()
+        try:
+            self.ChooseFunc()
+        except:
+            self.show_warning_messagebox('Error During Calculation.')
+                   
         if (self.defMatrix!=[]):
             self.ShowFinalMatrix()
         self.ShowLamda()
         self.ShowVector()
 
-
     def ChooseFunc(self):
-        #try:
         if (self.ui.radioButton_1.isChecked()==True):
             self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
         if (self.ui.radioButton_2.isChecked()==True):
@@ -159,12 +161,6 @@ class Eigen(QMainWindow):
             lamda_min, x= mineigen(self.matrix, self.vector, self.iterations)
             self.defMatrix= min_deflation_matrix(self.matrix, self.vector, lamda_min)
             self.eigen = secondmin(self.defMatrix, self.vector, self.iterations)
-        # except Exception as e:
-        #     print(f'Exception: {e}')
-        #     self.show_warning_messagebox('Error during calculation')
-        #     return
-
-        
 
     def ShowFinalMatrix(self):
         self.ui.tableWidget_3.setColumnCount(self.N)

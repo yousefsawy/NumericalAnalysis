@@ -13,6 +13,7 @@ from RK import RK_UI
 from LinearMatrix import Linear_UI
 from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
+from Eigen import EigenForm
 import math
 from Newton_Equi import Newton_Equi_Form
 from newton_general import newton_general_Form
@@ -48,7 +49,12 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
         self.ui.pushButton_2.clicked.connect(self.openCurveFitting)
         self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
+        self.ui.pushButton_48.clicked.connect(self.openEigenProblem)
     
+    def openEigenProblem(self):
+        self.eigen_form = EigenForm()
+        self.eigen_form.show()
+
     def OpenPredictor(self):
         self.predict_window = QtWidgets.QMainWindow()
         self.predict_Ui = Ui_Predictor()
