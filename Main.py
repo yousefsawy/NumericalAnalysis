@@ -5,7 +5,6 @@ from matplotlib.figure import Figure
 
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
-import math
 from RK import RK_UI
 
 class MainWindow(QMainWindow):
@@ -18,7 +17,7 @@ class MainWindow(QMainWindow):
         self.figure = self.canvas.figure
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_24.clicked.connect(self.VerifyFunc)
-        self.ui.pushButton_24.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
 
     def VerifyFunc(self):
 
@@ -55,9 +54,6 @@ class MainWindow(QMainWindow):
         self.plot_data(func,start,stop,step)
 
 
-
-
-
     def OpenHome(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -89,6 +85,10 @@ class MainWindow(QMainWindow):
 
         self.canvas.draw()
 
+    def OpenRKMain(self):
+        self.RK_window = RK_UI()
+        self.RK_window.show()
+
 
 
 def main():
@@ -111,6 +111,8 @@ def convert_to_function(input_string):
         return eval(input_string)
 
     return func
+
+
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QTa
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from UI_RK import Ui_Widget
+from UI_RK import Ui_Widget_RK
 from RK_Logic import Runge_Kutta
 
 
@@ -28,12 +28,6 @@ class RK_UI(QMainWindow):
         self.ui.lineEdit_4.setStyleSheet("background-color: rgb(82, 90, 100);")
         self.ui.lineEdit_12.setStyleSheet("background-color: rgb(82, 90, 100);")
 
-    def OpenRKMain(self):
-        self.RK_window = QtWidgets.QMainWindow
-        self.RK_window_UI = Ui_Widget()
-        self.RK_window_UI.setupUi(self.RK_window)
-        self.RK_window.show()
-
     def EnableSecond(self):
         self.ui.lineEdit_10.setEnabled(True)
         self.ui.lineEdit_4.setEnabled(True)
@@ -46,7 +40,7 @@ class RK_UI(QMainWindow):
         self.ui.frame.setVisible(not self.ui.frame.isVisible())    
                 
     def OpenRK(self):
-        self.ui = Ui_Widget()
+        self.ui = Ui_Widget_RK()
         self.ui.setupUi(self)
 
     def initInput(self):
@@ -96,7 +90,7 @@ class RK_UI(QMainWindow):
                 sympified_expr = sympify(self.ui.lineEdit_4.text(), locals={'x': x, 'y': y, 'z': z})
                 self.func.append(self.ui.lineEdit_4.text())
                 sympified_expr = sympify(self.ui.lineEdit_10.text(), locals={'x': x, 'y': y, 'z': z})
-                self.func.append(self.ui.lineEdit_10.text())
+                self.exact.append(self.ui.lineEdit_10.text())
         except:
             self.show_warning_messagebox("Invalid Expression.")
 
@@ -126,8 +120,6 @@ class RK_UI(QMainWindow):
         msg.setWindowTitle("Wrong Input")
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
         retval = msg.exec_()
-
-
 
 def RK():
     app = QApplication([])

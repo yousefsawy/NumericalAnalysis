@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Widget(object):
+class Ui_Widget_RK(object):
     def setupUi(self, Widget):
         Widget.setObjectName("Widget")
         Widget.resize(1029, 867)
