@@ -41,8 +41,8 @@ border-style:inset;</string>
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>120</y>
+       <x>60</x>
+       <y>50</y>
        <width>261</width>
        <height>31</height>
       </rect>
@@ -65,8 +65,8 @@ border-style:inset;</string>
     <widget class="QLineEdit" name="lineEdit_3">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>70</y>
+       <x>60</x>
+       <y>100</y>
        <width>261</width>
        <height>31</height>
       </rect>
@@ -161,33 +161,33 @@ border-style:inset;</string>
       <string>sec min</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>150</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Enter</string>
+     </property>
+    </widget>
     <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>360</x>
        <y>30</y>
        <width>321</width>
        <height>161</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>10</y>
-       <width>47</width>
-       <height>13</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Matrix</string>
-     </property>
-    </widget>
     <widget class="QTableWidget" name="tableWidget_2">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>700</x>
        <y>30</y>
        <width>41</width>
        <height>161</height>
@@ -197,7 +197,7 @@ border-style:inset;</string>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>700</x>
        <y>10</y>
        <width>47</width>
        <height>13</height>
@@ -205,6 +205,19 @@ border-style:inset;</string>
      </property>
      <property name="text">
       <string>Vector</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>10</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Matrix</string>
      </property>
     </widget>
    </widget>
