@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from Home import Ui_MainWindow
 from RichardsonExp import RichardsonExp_Control
-
+from Predictor import Ui_Predictor
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -17,6 +17,13 @@ class MainWindow(QMainWindow):
         self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_12.clicked.connect(self.OpenRich)
+        self.ui.pushButton_28.clicked.connect(self.OpenPredictor)
+
+    def OpenPredictor(self):
+        self.predict_window = QtWidgets.QMainWindow()
+        self.predict_Ui = Ui_Predictor()
+        self.predict_Ui.setupUi(self.predict_window)
+        self.predict_window.show()
 
     def OpenRich(self):
         self.rich_control.OpenRich()
