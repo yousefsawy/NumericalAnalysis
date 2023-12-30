@@ -650,7 +650,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.toolBox.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -663,9 +663,9 @@ class Ui_MainWindow(object):
         self.pushButton_5.setText(_translate("MainWindow", "Newton General"))
         self.pushButton_4.setText(_translate("MainWindow", "Lagrange"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), _translate("MainWindow", "Interpolation"))
-        self.pushButton_8.setText(_translate("MainWindow", "Trapezoidal"))
+        self.pushButton_8.setText(_translate("MainWindow", "Trapezoidal")) #Amira
         self.pushButton_6.setText(_translate("MainWindow", "Newton Simpson’s 1/3 rule"))
-        self.pushButton_9.setText(_translate("MainWindow", "Simpson’s 3/8 rule"))
+        self.pushButton_9.setText(_translate("MainWindow", "Simpson’s 3/8 rule")) #Amira
         self.pushButton_10.setText(_translate("MainWindow", "Romberg rule"))
         self.pushButton_7.setText(_translate("MainWindow", "Gauss Quadrature rule"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.Integration), _translate("MainWindow", "Integration"))
@@ -683,7 +683,7 @@ class Ui_MainWindow(object):
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_5), _translate("MainWindow", "Ordinary Differential Equations"))
         self.pushButton_47.setText(_translate("MainWindow", "Partial Differential Equations"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_6), _translate("MainWindow", "Partial Differential Equations"))
-        self.pushButton_48.setText(_translate("MainWindow", "Eigen Value Problem"))
+        self.pushButton_48.setText(_translate("MainWindow", "Eigen Value Problem"))  #Amira
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_7), _translate("MainWindow", "Eigen Value Problem"))
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>Verify any function used before entering it for calculation</p></body></html>"))
         self.label_4.setText(_translate("MainWindow", "Numerical Analysis"))
