@@ -12,8 +12,8 @@ class Eigen(QMainWindow):
     def __init__(self):
         super().__init__()
         self.OpenEigen()
-        self.ui.pushButton.setEnabled(True)
-        self.ui.pushButton.clicked.connect(self.initInput)
+        self.ui.pushButton_2.setEnabled(True)
+        self.ui.pushButton_2.clicked.connect(self.initInput)
         self.ui.pushButton.clicked.connect(self.executeFunc)
                 
     def OpenEigen(self):
@@ -75,10 +75,10 @@ class Eigen(QMainWindow):
             return
         
     def ValidateVectorInputs(self):
-        self.vector = [0]*self.N
+        self.vector = []
         try:
-            for col in range(self.N):
-                self.vector[col]=(float(self.ui.tableWidget_2.item(0, col).text()))
+            for row in range(self.N):
+                self.vector.append(float(self.ui.tableWidget_2.item(row,0).text()))
         except:
             self.show_warning_messagebox('Invalid Vector Input')
             return
@@ -100,6 +100,8 @@ class Eigen(QMainWindow):
 
     def executeFunc(self):
         self.ValidateInput()
+        self.defMatrix=[]
+        self.ChooseFunc()
         if (self.defMatrix!=[]):
             self.ShowFinalMatrix()
         self.ShowLamda()
@@ -107,26 +109,29 @@ class Eigen(QMainWindow):
 
 
     def ChooseFunc(self):
-        if (self.ui.radio_button_1.isChecked()==True):
-            self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
-        if (self.ui.radio_button_2.isChecked()==True):
-            self.eigen= mineigen(self.matrix, self.vector, self.iterations)
-        if (self.ui.radio_button_3.isChecked()==True):
-            self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
-            lamda_max, x = self.eigen
-            self.defMatrix = max_deflation_matrix(self.matrix, self.vector, lamda_max)
-        if (self.ui.radio_button_4.isChecked()==True):
-            self.eigen= mineigen(self.matrix, self.vector, self.iterations)
-            lamda_max, x = self.eigen
-            self.defMatrix = min_deflation_matrix(self.matrix, self.vector, lamda_min)
-        if (self.ui.radio_button_5.isChecked()==True):
-            lamda_max, x= maxeigen(self.matrix, self.vector, self.iterations)
-            self.defMatrix= max_deflation_matrix(self.matrix, self.vector, lamda_max)
-            self.eigen = secondmax(self.defMatrix, self.vector, self.iterations)
-        if (self.ui.radio_button_6.isChecked()==True):
-            lamda_min, x= mineigen(self.matrix, self.vector, self.iterations)
-            self.defMatrix= min_deflation_matrix(self.matrix, self.vector, lamda_min)
-            self.eigen = secondmin(self.defMatrix, self.vector, self.iterations)
+        try:
+            if (self.ui.radioButton_1.isChecked()==True):
+                self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
+            if (self.ui.radioButton_2.isChecked()==True):
+                self.eigen= mineigen(self.matrix, self.vector, self.iterations)
+            if (self.ui.radioButton_3.isChecked()==True):
+                self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
+                lamda_max, x = self.eigen
+                self.defMatrix = max_deflation_matrix(self.matrix, self.vector, lamda_max)
+            if (self.ui.radioButton_4.isChecked()==True):
+                self.eigen= mineigen(self.matrix, self.vector, self.iterations)
+                lamda_min, x = self.eigen
+                self.defMatrix = min_deflation_matrix(self.matrix, self.vector, lamda_min)
+            if (self.ui.radioButton_5.isChecked()==True):
+                lamda_max, x= maxeigen(self.matrix, self.vector, self.iterations)
+                self.defMatrix= max_deflation_matrix(self.matrix, self.vector, lamda_max)
+                self.eigen = secondmax(self.defMatrix, self.vector, self.iterations)
+            if (self.ui.radioButton_6.isChecked()==True):
+                lamda_min, x= mineigen(self.matrix, self.vector, self.iterations)
+                self.defMatrix= min_deflation_matrix(self.matrix, self.vector, lamda_min)
+                self.eigen = secondmin(self.defMatrix, self.vector, self.iterations)
+        except:
+            self.show_warning_messagebox("Error during Calculation")
 
         
 
@@ -150,7 +155,7 @@ class Eigen(QMainWindow):
         for row in range(self.N):
             item = QTableWidgetItem(str(self.eigen[1][row]))
             self.ui.tableWidget_4.setItem(row, 0, item)
-            self.ui.tableWidget_4.setColumnWidth(51)
+            self.ui.tableWidget_4.setColumnWidth(0, 51)
         self.ui.tableWidget_3.setRowHeight(row, int(120/(self.N)))
 
     def ShowLamda(self):
@@ -166,11 +171,11 @@ class Eigen(QMainWindow):
 
 
     
-def Linear():
+def Eig():
     app = QApplication([])
-    window = MainWindow()
+    window = Eigen()
     window.show()
     app.exec_()
 
 if __name__ == '__main__':
-    Linear()
+    Eig()
