@@ -1,11 +1,9 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
 
 from Home import Ui_MainWindow
-from mplwidget import MplWidget
-import math
+from RichardsonExp import RichardsonExp_Control
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,9 +14,12 @@ class MainWindow(QMainWindow):
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
 
-
+        self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_12.clicked.connect(self.OpenRich)
 
+    def OpenRich(self):
+        self.rich_control.OpenRich()
     def VerifyFunc(self):
 
         start = self.ui.textEdit_3.toPlainText()
@@ -110,6 +111,7 @@ def convert_to_function(input_string):
         return eval(input_string)
 
     return func
+
 
 
 if __name__ == "__main__":
