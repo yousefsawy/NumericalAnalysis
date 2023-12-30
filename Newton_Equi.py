@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
-class Newton_Equi(object):
+class Newton_Equi_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1582, 737)
@@ -957,7 +957,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Newton_Equi()
+    ui = Newton_Equi_Form()
     ui.setupUi(Form)
     Form.show() 
     Form.setWindowTitle("Newton General")

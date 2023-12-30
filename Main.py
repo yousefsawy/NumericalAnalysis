@@ -8,6 +8,9 @@ from RK import RK_UI
 from LinearMatrix import Linear_UI
 from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
+import math
+from Newton_Equi import Newton_Equi_Form
+from newton_general import newton_general_Form
 
 import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
@@ -17,9 +20,16 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.trapezoidal_form = None
         self.simpson38_form = None
+
+        self.NewtonGeneral_Form = None
+        self.NewtonEqui_Form = None
+
         self.OpenHome()
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
+
+        self.ui.pushButton_5.clicked.connect(self.OpenNewtonGenral)
+        self.ui.pushButton_3.clicked.connect(self.OpenNewtonEqui)
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_24.clicked.connect(self.OpenLinear)
         self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
@@ -38,6 +48,18 @@ class MainWindow(QMainWindow):
             self.simpson38_form = Simpson38Form()
         self.simpson38_form.show()
         
+    def OpenNewtonGenral(self):
+        self.NewtonGeneralWindow = QtWidgets.QMainWindow()
+        self.NewtonGeneralUI = newton_general_Form()
+        self.NewtonGeneralUI.setupUi(self.NewtonGeneralWindow)
+        self.NewtonGeneralWindow.show() 
+
+    def OpenNewtonEqui(self):
+        self.NewtonEquiWindow = QtWidgets.QMainWindow()
+        self.NewtonEquiUI = Newton_Equi_Form()
+        self.NewtonEquiUI.setupUi(self.NewtonEquiWindow)
+        self.NewtonEquiWindow.show()      
+
     def VerifyFunc(self):
         start = self.ui.textEdit_3.toPlainText()
         try:
