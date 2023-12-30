@@ -202,7 +202,8 @@ class EigenForm(QMainWindow):
 
         self.tab_widget = QTabWidget(self)
         self.setCentralWidget(self.tab_widget)
-
+		# Set the initial size of the form
+        self.resize(1200, 600)
         # Create and add the pages to the tab widget
         self.function_page = Eigen()
         self.about_page = AboutPage()
