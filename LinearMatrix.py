@@ -82,7 +82,7 @@ class Linear_UI(QMainWindow):
         self.vector = [0]*self.N
         try:
             for col in range(self.N):
-                self.vector[col]=(float(self.ui.tableWidget.item(0, col).text()))
+                self.vector[col]=(float(self.ui.tableWidget_2.item(0, col).text()))
         except:
             self.show_warning_messagebox('Invalid Vector Input')
             return
