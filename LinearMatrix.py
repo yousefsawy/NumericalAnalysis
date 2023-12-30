@@ -8,7 +8,7 @@ from linear import Ui_Widget
 from linear_logic import func
 
 
-class MainWindow(QMainWindow):
+class Linear_UI(QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
     def ValidateInputN(self):
         try:
             self.N = int(self.ui.lineEdit.text())
-            if (self.iterations<1):
+            if (self.N<1):
                 raise Exception("N should be a positive integer")
         except:
             self.show_warning_messagebox('N should be an integer')

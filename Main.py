@@ -6,6 +6,7 @@ from matplotlib.figure import Figure
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
 from RK import RK_UI
+from LinearMatrix import Linear_UI
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,7 +17,7 @@ class MainWindow(QMainWindow):
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
-        self.ui.pushButton_24.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_24.clicked.connect(self.OpenLinear)
         self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
 
     def VerifyFunc(self):
@@ -89,6 +90,9 @@ class MainWindow(QMainWindow):
         self.RK_window = RK_UI()
         self.RK_window.show()
 
+    def OpenLinear(self):
+        self.Linear_window = Linear_UI()
+        self.Linear_window.show()
 
 
 def main():
