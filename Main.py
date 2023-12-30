@@ -2,27 +2,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
-import math
-
+from RK import RK_UI
+from LinearMatrix import Linear_UI
 from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
         self.trapezoidal_form = None
         self.simpson38_form = None
-
         self.OpenHome()
-
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_24.clicked.connect(self.OpenLinear)
+        self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
         self.ui.pushButton_8.clicked.connect(self.OpenTrapezoidal)
         self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
 
@@ -89,6 +86,15 @@ class MainWindow(QMainWindow):
         ax.plot(x, y)
         self.canvas.draw()
 
+    def OpenRKMain(self):
+        self.RK_window = RK_UI()
+        self.RK_window.show()
+
+    def OpenLinear(self):
+        self.Linear_window = Linear_UI()
+        self.Linear_window.show()
+
+
 def main():
     app = QApplication([])
     window = MainWindow()
@@ -109,6 +115,8 @@ def convert_to_function(input_string):
         return eval(input_string)
 
     return func
+
+
 
 
 if __name__ == "__main__":
