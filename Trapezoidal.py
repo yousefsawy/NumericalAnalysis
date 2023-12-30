@@ -375,11 +375,7 @@ class TrapezoidalForm(QMainWindow):
 
         # Show the default tab
         self.tab_widget.setCurrentIndex(0)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-
-    app.setStyleSheet("""
+        self.setStyleSheet("""
         /*
 Material Dark Style Sheet for QT Applications
 Author: Jaime A. Quiroga P.
@@ -782,6 +778,9 @@ QStackedWidget::widget:hover {
 
     """)
     
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
     main_app = TrapezoidalForm()
     main_app.show()
     sys.exit(app.exec_())
