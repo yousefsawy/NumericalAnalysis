@@ -6,18 +6,36 @@ from matplotlib.figure import Figure
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
 import math
+from Newton_Equi import Newton_Equi_Form
+from newton_general import newton_general_Form
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        self.NewtonGeneral_Form = None
+        self.NewtonEqui_Form = None
 
         self.OpenHome()
 
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
 
-
+        self.ui.pushButton_5.clicked.connect(self.OpenNewtonGenral)
+        self.ui.pushButton_3.clicked.connect(self.OpenNewtonEqui)
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+
+    def OpenNewtonGenral(self):
+        self.NewtonGeneralWindow = QtWidgets.QMainWindow()
+        self.NewtonGeneralUI = newton_general_Form()
+        self.NewtonGeneralUI.setupUi(self.NewtonGeneralWindow)
+        self.NewtonGeneralWindow.show() 
+
+    def OpenNewtonEqui(self):
+        self.NewtonEquiWindow = QtWidgets.QMainWindow()
+        self.NewtonEquiUI = Newton_Equi_Form()
+        self.NewtonEquiUI.setupUi(self.NewtonEquiWindow)
+        self.NewtonEquiWindow.show()      
 
     def VerifyFunc(self):
 
