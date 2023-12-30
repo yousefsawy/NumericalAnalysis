@@ -9,6 +9,9 @@ from LinearMatrix import Linear_UI
 from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
 
+import math
+from CurveFittingMainWindow import Ui_CurveFittingForm
+from Simpsons13MainWindow import Ui_Simpsons13
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,6 +25,8 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
         self.ui.pushButton_8.clicked.connect(self.OpenTrapezoidal)
         self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
+        self.ui.pushButton_2.clicked.connect(self.openCurveFitting)
+        self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
 
     def OpenTrapezoidal(self):
         if not self.trapezoidal_form:
@@ -65,6 +70,18 @@ class MainWindow(QMainWindow):
     def OpenHome(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+    def openCurveFitting(self):
+        self.CurveFittingWindow = QtWidgets.QMainWindow()
+        self.CurveFittingUI = Ui_CurveFittingForm()
+        self.CurveFittingUI.setupUi(self.CurveFittingWindow)
+        self.CurveFittingWindow.show()
+
+    def openSimpsons13(self):
+        self.Simpsons13Window = QtWidgets.QMainWindow()
+        self.Simpsons13UI = Ui_Simpsons13()
+        self.Simpsons13UI.setupUi(self.Simpsons13Window)
+        self.Simpsons13Window.show()
 
     def show_warning_messagebox(self, message):
         msg = QtWidgets.QMessageBox()
