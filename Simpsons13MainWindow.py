@@ -522,7 +522,7 @@ class Ui_Simpsons13(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Simpsons13)
         self.calculateButton1.clicked.connect(lambda: self.simpsons_function(self.functionTextBox.text(),self.startRangeTextBox.text(),self.endRangeTextBox.text(),self.intervalsTextBox.text()))
-        self.calculateButton1.clicked.connect(lambda: self.simpsons_function(self.functionTextBox.text(),self.startRangeTextBox.text(),self.endRangeTextBox.text(),self.intervalsTextBox.text()))
+        self.calculateButton2.clicked.connect(lambda: self.simpsons_table(self.xValuesTextBox.text(),self.yValuesTextBox.text()))
 
     def simpsons_function(self, func_str, a, b, n):
         self.resultTextBox1.setText("")
