@@ -1,140 +1,195 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWidgets import QDialog
-import sys
-import ast
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from guess import Ui_Dialog   # Import the class generated from the UI file
-import numpy as np
-import matplotlib.pyplot as plt
-import sympy as sp
-import guessfunc as g
-import math
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene, QGraphicsView, QPushButton, QVBoxLayout, QWidget
-from PyQt5.QtGui import QImage, QPixmap  # Import QImage and QPixmap from PyQt5.QtGui
+
+from Home import Ui_MainWindow
+from RichardsonExp import RichardsonExp_Control
+from Predictor import Ui_Predictor
+from DifferentialEqn import DifferentialEquationSolver
+from Lagrange_with_graph import LagrangeInterpolationCalculator
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import matplotlib.pyplot as plt  # Import matplotlib.pyplot
-
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-
-
 from mplwidget import MplWidget
+from RK import RK_UI
+from LinearMatrix import Linear_UI
+from Trapezoidal import TrapezoidalForm
+from Simpson38 import Simpson38Form
+from Eigen import EigenForm
 import math
-
-
-import math
-
-import math
+from Newton_Equi import Newton_Equi_Form
+from newton_general import newton_general_Form
 
 import math
+from CurveFittingMainWindow import Ui_CurveFittingForm
+from Simpsons13MainWindow import Ui_Simpsons13
 
-import math
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.trapezoidal_form = None
+        self.simpson38_form = None
+
+        self.NewtonGeneral_Form = None
+        self.NewtonEqui_Form = None
+
+        self.OpenHome()
+        self.canvas = self.ui.widget.canvas
+        self.figure = self.canvas.figure
+
+        self.rich_control = RichardsonExp_Control()
+        self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_12.clicked.connect(self.OpenRich)
+        self.ui.pushButton_28.clicked.connect(self.OpenPredictor)
+        self.ui.pushButton_4.clicked.connect(self.OpenLagrange)
+        self.ui.pushButton_5.clicked.connect(self.OpenNewtonGenral)
+        self.ui.pushButton_3.clicked.connect(self.OpenNewtonEqui)
+        self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_24.clicked.connect(self.OpenLinear)
+        self.ui.pushButton_27.clicked.connect(self.OpenRKMain)
+        self.ui.pushButton_8.clicked.connect(self.OpenTrapezoidal)
+        self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
+        self.ui.pushButton_2.clicked.connect(self.openCurveFitting)
+        self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
+        self.ui.pushButton_48.clicked.connect(self.openEigenProblem)
+    
+    def openEigenProblem(self):
+        self.eigen_form = EigenForm()
+        self.eigen_form.show()
+
+    def OpenPredictor(self):
+        self.predict_window = QtWidgets.QMainWindow()
+        self.predict_Ui = Ui_Predictor()
+        self.predict_Ui.setupUi(self.predict_window)
+        self.predict_window.show()
+
+    def OpenDiff(self):
+        self.diff_window = DifferentialEquationSolver()
+        self.diff_window.show()
+
+    def OpenLagrange(self):
+        self.Lagrange_window = LagrangeInterpolationCalculator()
+        self.Lagrange_window.show()
+        
+    def OpenRich(self):
+        self.rich_control.OpenRich()
+
+    def OpenTrapezoidal(self):
+        if not self.trapezoidal_form:
+            self.trapezoidal_form = TrapezoidalForm()
+        self.trapezoidal_form.show()
+
+    def OpenSimpson38(self):
+        if not self.simpson38_form:
+            self.simpson38_form = Simpson38Form()
+        self.simpson38_form.show()
+        
+    def OpenNewtonGenral(self):
+        self.NewtonGeneralWindow = QtWidgets.QMainWindow()
+        self.NewtonGeneralUI = newton_general_Form()
+        self.NewtonGeneralUI.setupUi(self.NewtonGeneralWindow)
+        self.NewtonGeneralWindow.show() 
+
+    def OpenNewtonEqui(self):
+        self.NewtonEquiWindow = QtWidgets.QMainWindow()
+        self.NewtonEquiUI = Newton_Equi_Form()
+        self.NewtonEquiUI.setupUi(self.NewtonEquiWindow)
+        self.NewtonEquiWindow.show()      
+
+    def VerifyFunc(self):
+        start = self.ui.textEdit_3.toPlainText()
+        try:
+            start = int(start)
+        except:
+            self.show_warning_messagebox('Start should be an integer')
+            return
+        func = self.ui.textEdit.toPlainText()
+        try:
+            func = convert_to_function(func)
+            func(start)
+        except:
+            self.show_warning_messagebox('Function is incorrect')
+            return
+        stop = self.ui.textEdit_4.toPlainText()
+        try:
+            stop = int(stop)
+        except:
+            self.show_warning_messagebox('Stop should be an integer')
+            return
+        step = self.ui.textEdit_5.toPlainText()
+        try:
+            step = int(step)
+        except:
+            self.show_warning_messagebox('Step should be an integer')
+            return
+
+        self.plot_data(func,start,stop,step)
+
+    def OpenHome(self):
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+    def openCurveFitting(self):
+        self.CurveFittingWindow = QtWidgets.QMainWindow()
+        self.CurveFittingUI = Ui_CurveFittingForm()
+        self.CurveFittingUI.setupUi(self.CurveFittingWindow)
+        self.CurveFittingWindow.show()
+
+    def openSimpsons13(self):
+        self.Simpsons13Window = QtWidgets.QMainWindow()
+        self.Simpsons13UI = Ui_Simpsons13()
+        self.Simpsons13UI.setupUi(self.Simpsons13Window)
+        self.Simpsons13Window.show()
+
+    def show_warning_messagebox(self, message):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Warning)
+        msg.setText(message)
+        msg.setWindowTitle("Wrong Input")
+        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        retval = msg.exec_()
+
+    def plot_data(self,func,start,end,step):
+        # Generate sample data
+        y = []
+        x = []
+        for i in range(start, end, step):
+                y.append(func(i))
+                x.append(i)
+        self.figure.clear()
+        ax = self.figure.add_subplot(111)
+        ax.plot(x, y)
+        self.canvas.draw()
+
+    def OpenRKMain(self):
+        self.RK_window = RK_UI()
+        self.RK_window.show()
+
+    def OpenLinear(self):
+        self.Linear_window = Linear_UI()
+        self.Linear_window.show()
 
 
-def plot_data(canvas, func, start, end, step):
-    # Generate sample data
-    y = []
-    x = []
-    for i in range(start, end, step):
-        y.append(func(i))
-        x.append(i)
+def main():
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
 
-    canvas.figure.clear()
-    ax = canvas.figure.add_subplot(111)
-    ax.plot(x, y)
-    canvas.draw()
 
-def convert_to_function_x(input_string):
-    # Replace sin, cos, ln, exp with np.sin, np.cos, np.log, np.exp respectively
-    input_string = input_string.replace('sin', 'np.sin')
-    input_string = input_string.replace('cos', 'np.cos')
-    input_string = input_string.replace('ln', 'np.log')
-    input_string = input_string.replace('exp', 'np.exp')
-    input_string = input_string.replace('power', 'np.power')
 
-    # Create a lambda function with one argument (x)
-    func = lambda x: eval(input_string.replace('x', str(x)))
+def convert_to_function(input_string):
+    # Replace sin, cos, ln, exp with math.sin, math.cos, math.log, math.exp respectively
+    input_string = input_string.replace('sin', 'math.sin')
+    input_string = input_string.replace('cos', 'math.cos')
+    input_string = input_string.replace('ln', 'math.log')
+    input_string = input_string.replace('exp', 'math.exp')
+
+    # Evaluate the input string as a function
+    def func(x):
+        return eval(input_string)
 
     return func
 
 
-class MatplotlibCanvas(FigureCanvas):
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
-        super(MatplotlibCanvas, self).__init__(fig)
-        self.setParent(parent)
 
-class MyApp(QMainWindow, Ui_Dialog):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-
-        self.central_widget = None
-        self.pushButton.clicked.connect(self.calculate)
-
-    def calculate(self):
-        lower_limit = int(self.lineEdit.text())
-        upper_limit = int(self.lineEdit_2.text())
-        n = int(self.lineEdit_3.text())
-        exactvalue = int(self.lineEdit_5.text())
-        analytical = int(self.lineEdit_6.text())
-        fun = convert_to_function_x(self.lineEdit_4.text())
-        res = g.Final(upper_limit, lower_limit, n)
-        self.textBrowser_2.setText(g.About_Section())
-        self.textBrowser.setText(str(res))
-        #self.textBrowser_3.setText(g.True_Error(exactvalue,res))
-        if(self.lineEdit_5.text()!=""):
-           self.textBrowser_2.setText(g.ChosenExactMethod(2,upper_limit,lower_limit))
-        else:
-           self.textBrowser_2.setText(g.ChosenExactMethod(1,upper_limit,lower_limit))
-        lower_limit_text = self.lineEdit.text()
-        upper_limit_text = self.lineEdit_2.text()
-        n_text = self.lineEdit_3.text()
-
-        if not lower_limit_text or not upper_limit_text or not n:
-            # Show a message or handle the case when any of the inputs is empty
-            return
-        fun = convert_to_function_x(self.lineEdit_4.text())
-
-        # Create the MatplotlibCanvas instance if not already created
-        if self.central_widget is None:
-            self.central_widget = MatplotlibCanvas(self)
-            self.setCentralWidget(self.central_widget)
-
-        # Plot the data
-        plot_data(self.central_widget, fun, lower_limit, upper_limit)
-
-    def plot_function(self):
-        lower_limit_text = self.lineEdit.text()
-        upper_limit_text = self.lineEdit_2.text()
-
-        if not lower_limit_text or not upper_limit_text  :
-            # Show a message or handle the case when any of the inputs is empty
-            return
-
-        lower_limit = int(lower_limit_text)
-        upper_limit = int(upper_limit_text)
-
-
-        fun = convert_to_function_x(self.lineEdit_4.text())
-
-        # Create the MatplotlibCanvas instance if not already created
-        if self.central_widget is None:
-            self.central_widget = MatplotlibCanvas(self)
-            self.setCentralWidget(self.central_widget)
-
-        # Plot the data
-        plot_data(self.central_widget, fun, lower_limit, upper_limit)
-
-def main():
-    app = QApplication(sys.argv)
-    my_app = MyApp()
-    my_app.show()
-    app.exec_()
-    sys.exit(app.exec_())
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
