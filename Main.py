@@ -7,28 +7,42 @@ from Home import Ui_MainWindow
 from mplwidget import MplWidget
 import math
 
+from Trapezoidal import TrapezoidalForm
+from Simpson38 import Simpson38Form
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        self.trapezoidal_form = None
+        self.simpson38_form = None
 
         self.OpenHome()
 
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
 
-
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_8.clicked.connect(self.OpenTrapezoidal)
+        self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
 
+    def OpenTrapezoidal(self):
+        if not self.trapezoidal_form:
+            self.trapezoidal_form = TrapezoidalForm()
+        self.trapezoidal_form.show()
+
+    def OpenSimpson38(self):
+        if not self.simpson38_form:
+            self.simpson38_form = Simpson38Form()
+        self.simpson38_form.show()
+        
     def VerifyFunc(self):
-
         start = self.ui.textEdit_3.toPlainText()
         try:
             start = int(start)
         except:
             self.show_warning_messagebox('Start should be an integer')
             return
-
-
         func = self.ui.textEdit.toPlainText()
         try:
             func = convert_to_function(func)
@@ -36,14 +50,12 @@ class MainWindow(QMainWindow):
         except:
             self.show_warning_messagebox('Function is incorrect')
             return
-
         stop = self.ui.textEdit_4.toPlainText()
         try:
             stop = int(stop)
         except:
             self.show_warning_messagebox('Stop should be an integer')
             return
-
         step = self.ui.textEdit_5.toPlainText()
         try:
             step = int(step)
@@ -53,10 +65,6 @@ class MainWindow(QMainWindow):
 
         self.plot_data(func,start,stop,step)
 
-
-
-
-
     def OpenHome(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -64,13 +72,9 @@ class MainWindow(QMainWindow):
     def show_warning_messagebox(self, message):
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Warning)
-
         msg.setText(message)
-
         msg.setWindowTitle("Wrong Input")
-
         msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
-
         retval = msg.exec_()
 
     def plot_data(self,func,start,end,step):
@@ -80,15 +84,10 @@ class MainWindow(QMainWindow):
         for i in range(start, end, step):
                 y.append(func(i))
                 x.append(i)
-
         self.figure.clear()
-
         ax = self.figure.add_subplot(111)
         ax.plot(x, y)
-
         self.canvas.draw()
-
-
 
 def main():
     app = QApplication([])
