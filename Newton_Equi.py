@@ -788,6 +788,7 @@ QStackedWidget::widget:hover {
                                 c="valid"
         value = float(self.lineEdit_3.text())
         PolyType=(int(self.lineEdit_4.text()))
+
         plt.plot(X, Y, marker='o', linestyle='', markersize=8, color='r')
         plt.plot(X, Y, color='tab:blue')
         plt.xlabel('X-Axis')
@@ -795,6 +796,7 @@ QStackedWidget::widget:hover {
         plt.title('Newton Equidistant Interpolation Plot')
         plt.legend()
         plt.show()
+
         if (PolyType>len(X)-1):
                 message_box = QMessageBox()
                 message_box.setWindowTitle("Invalid Input")
@@ -804,6 +806,7 @@ QStackedWidget::widget:hover {
                 message_box.exec_()   
                 return
                 PolyType = (int(self.lineEdit_4.text()))
+
         CopyX2=X.copy()
         X.sort(key=lambda x: abs(x - value))
         CopyX=X.copy()
@@ -814,6 +817,7 @@ QStackedWidget::widget:hover {
                 CopyX1[1] = K
         if(np.array_equal(CopyX1,np.flip(CopyX2))==True):
                 CopyY= [x for _, x in sorted(zip(CopyX1, Y))]
+
                 h=(-1)*h
         else:
                 NearestX = CopyX[0]
@@ -847,7 +851,9 @@ QStackedWidget::widget:hover {
                 CopyY = [x for _, x in sorted(zip(CopyX1, Y))]
                 if (CopyX1[0]>CopyX1[1]):
                         h=-1*(h)
+
         AlphaK=(value-CopyX1[0])/h
+
         AllCoefficients = []
         AllCoefficients.append(CopyY[0])
         SomeCoefficients = []
@@ -898,7 +904,7 @@ QStackedWidget::widget:hover {
         self.textBrowser_8.setText(str(FunctionX))
         self.textBrowser_12.setText(str(fdashTotal))
         self.textBrowser_10.setText(str(fdash))
-      
+
         
 
 

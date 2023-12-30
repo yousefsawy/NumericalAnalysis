@@ -21,7 +21,9 @@ from finit2 import Finite_Form
 import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
 from Simpsons13MainWindow import Ui_Simpsons13
+
 from Euler import DifferentialEquationSolver
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -53,6 +55,7 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_48.clicked.connect(self.openEigenProblem)
         self.ui.pushButton_11.clicked.connect(self.OpenFinite)
         self.ui.pushButton_29.clicked.connect(self.OpenEuler)
+
     
     def openEigenProblem(self):
         self.eigen_form = EigenForm()
@@ -103,10 +106,12 @@ class MainWindow(QMainWindow):
         self.FiniteUI.setupUi(self.FiniteWindow)
         self.FiniteWindow.show()
 
+
     def OpenEuler(self):
         self.EulerUI = DifferentialEquationSolver()  # Create an instance of your custom window
         self.EulerUI.init_ui()  # Initialize the UI of DifferentialEquationSolver
         self.EulerUI.show()  # Show the DifferentialEquationSolver window
+
 
     def VerifyFunc(self):
         start = self.ui.textEdit_3.toPlainText()
