@@ -79,9 +79,12 @@ class Eigen(QMainWindow):
         try:
             for row in range(self.N):
                 self.vector.append(float(self.ui.tableWidget_2.item(row,0).text()))
-        except:
+            print("ana el vector", self.vector)
+        except Exception as e:
+            print(f'Exception: {e}')
             self.show_warning_messagebox('Invalid Vector Input')
             return
+
     
     def ValidateIterations(self):
         try:
@@ -109,29 +112,31 @@ class Eigen(QMainWindow):
 
 
     def ChooseFunc(self):
-        try:
-            if (self.ui.radioButton_1.isChecked()==True):
-                self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
-            if (self.ui.radioButton_2.isChecked()==True):
-                self.eigen= mineigen(self.matrix, self.vector, self.iterations)
-            if (self.ui.radioButton_3.isChecked()==True):
-                self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
-                lamda_max, x = self.eigen
-                self.defMatrix = max_deflation_matrix(self.matrix, self.vector, lamda_max)
-            if (self.ui.radioButton_4.isChecked()==True):
-                self.eigen= mineigen(self.matrix, self.vector, self.iterations)
-                lamda_min, x = self.eigen
-                self.defMatrix = min_deflation_matrix(self.matrix, self.vector, lamda_min)
-            if (self.ui.radioButton_5.isChecked()==True):
-                lamda_max, x= maxeigen(self.matrix, self.vector, self.iterations)
-                self.defMatrix= max_deflation_matrix(self.matrix, self.vector, lamda_max)
-                self.eigen = secondmax(self.defMatrix, self.vector, self.iterations)
-            if (self.ui.radioButton_6.isChecked()==True):
-                lamda_min, x= mineigen(self.matrix, self.vector, self.iterations)
-                self.defMatrix= min_deflation_matrix(self.matrix, self.vector, lamda_min)
-                self.eigen = secondmin(self.defMatrix, self.vector, self.iterations)
-        except:
-            self.show_warning_messagebox("Error during Calculation")
+        #try:
+        if (self.ui.radioButton_1.isChecked()==True):
+            self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
+        if (self.ui.radioButton_2.isChecked()==True):
+            self.eigen= mineigen(self.matrix, self.vector, self.iterations)
+        if (self.ui.radioButton_3.isChecked()==True):
+            self.eigen= maxeigen(self.matrix, self.vector, self.iterations)
+            lamda_max, x = self.eigen
+            self.defMatrix = max_deflation_matrix(self.matrix, self.vector, lamda_max)
+        if (self.ui.radioButton_4.isChecked()==True):
+            self.eigen= mineigen(self.matrix, self.vector, self.iterations)
+            lamda_min, x = self.eigen
+            self.defMatrix = min_deflation_matrix(self.matrix, self.vector, lamda_min)
+        if (self.ui.radioButton_5.isChecked()==True):
+            lamda_max, x= maxeigen(self.matrix, self.vector, self.iterations)
+            self.defMatrix= max_deflation_matrix(self.matrix, self.vector, lamda_max)
+            self.eigen = secondmax(self.defMatrix, self.vector, self.iterations)
+        if (self.ui.radioButton_6.isChecked()==True):
+            lamda_min, x= mineigen(self.matrix, self.vector, self.iterations)
+            self.defMatrix= min_deflation_matrix(self.matrix, self.vector, lamda_min)
+            self.eigen = secondmin(self.defMatrix, self.vector, self.iterations)
+        # except Exception as e:
+        #     print(f'Exception: {e}')
+        #     self.show_warning_messagebox('Error during calculation')
+        #     return
 
         
 
