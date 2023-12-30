@@ -247,6 +247,33 @@ def fixed_point_main(user_equation1, user_equation2, start_x = 0, start_y = 0, i
 
     return output_func
 
+def plot_eqn(user_equation1, user_equation2, use_one_var = False):
+    """
+    Plots the Given Equations
+
+    Parameters:
+    - user_equation1 & user_equation2: Equations to be plotted
+    - use_one_var: True when one-variable method is needed, false otherwise (and false by default).
+    """
+
+    x, y = symbols('x y')
+
+    if use_one_var is True:
+        # Convert both eqn into sympy expression
+        f = sympify(user_equation1)
+        plot(f, (x, -5, 5), title='Graph of f(x)', xlabel='x', ylabel='f(x)')
+    else:
+        # Convert both eqns into sympy expressions
+        f1 = sympify(user_equation1)
+        f2 = sympify(user_equation2)
+        # Plot the first and second functions
+        plot1 = plot3d(f1, (x, -0.5, 0.5), (y, -0.5, 0.5), title='Graph of f1(x,y) & f2(x,y)',
+                        xlabel='x', ylabel='y', show = False)
+        plot2 = plot3d(f2, (x, -0.5, 0.5), (y, -0.5, 0.5), title='Graph of f2(x,y)',
+                        xlabel='x', ylabel='y', show = False)
+        # Add the plot of the 2nd function to the first
+        plot1.extend(plot2)
+        plot1.show()
 
 
 # #Input Examples:
