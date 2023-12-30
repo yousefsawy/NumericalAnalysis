@@ -15,10 +15,11 @@ from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
 from Eigen import EigenForm
 import math
+from FixedPointTesting import FixedPoint1
+from NewtonRaphsonTesting import NewtonRaphson1
 from Newton_Equi import Newton_Equi_Form
 from newton_general import newton_general_Form
 from finit2 import Finite_Form
-import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
 from Simpsons13MainWindow import Ui_Simpsons13
 
@@ -34,7 +35,8 @@ class MainWindow(QMainWindow):
         self.OpenHome()
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-        
+        self.ui.pushButton_26.clicked.connect(self.OpenNewtonRaphson)
+        self.ui.pushButton_25.clicked.connect(self.OpenFixedPoint)
         self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_12.clicked.connect(self.OpenRich)
@@ -100,6 +102,13 @@ class MainWindow(QMainWindow):
         self.FiniteUI = Finite_Form()
         self.FiniteUI.setupUi(self.FiniteWindow)
         self.FiniteWindow.show()
+
+    def OpenFixedPoint(self):
+        self.FixedPoint1_window=FixedPoint1()
+        self.FixedPoint1_window.show()
+    def OpenNewtonRaphson(self):
+        self.NewtonRaphson_window=NewtonRaphson1()
+        self.NewtonRaphson_window.show()
 
     def VerifyFunc(self):
         start = self.ui.textEdit_3.toPlainText()
