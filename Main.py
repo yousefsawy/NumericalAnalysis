@@ -6,7 +6,8 @@ from matplotlib.figure import Figure
 from Home import Ui_MainWindow
 from mplwidget import MplWidget
 import math
-
+from FixedPointTesting import FixedPoint1
+from NewtonRaphsonTesting import NewtonRaphson1
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -16,8 +17,16 @@ class MainWindow(QMainWindow):
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
 
-
+        self.ui.pushButton_26.clicked.connect(self.OpenNewtonRaphson)
+        self.ui.pushButton_25.clicked.connect(self.OpenFixedPoint)
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+
+    def OpenFixedPoint(self):
+        self.FixedPoint1_window=FixedPoint1()
+        self.FixedPoint1_window.show()
+    def OpenNewtonRaphson(self):
+        self.NewtonRaphson_window=NewtonRaphson1()
+        self.NewtonRaphson_window.show()
 
     def VerifyFunc(self):
 

@@ -1,5 +1,6 @@
 import sympy as sp
 from sympy import sympify
+from sympy.plotting import plot_implicit
 
 #*************************************************************#
 #****************FUNC****************#
@@ -59,7 +60,11 @@ def NonLinearNewton (func1, func2, start_x, start_y, num_of_iterations = 20, sto
     error_y = abs ((error_y/y_iterations)*100)       
     # print (f"The solution is x = {x_iterations}, y = {y_iterations}") 
     # print (f"The error in calculating x = {error_x} %  ,The error in calculating y = {error_y} %") 
-    
+    p1 = plot_implicit(expression1, show=False, line_color='blue', legend=True, x_value = x, y_value = y)
+    p2 = plot_implicit(expression2, show=False, line_color='red', legend=True, x_value = x, y_value = y)
+    p1.extend(p2)
+    p1.show() 
+
     return x_iterations, y_iterations, error_x, error_y
 
 #Example from assignment 5 

@@ -17,6 +17,7 @@
 from sympy import symbols, sympify, Eq, solve, diff
 from sympy.functions.elementary import *
 from sympy.plotting import plot3d, plot
+from sympy.plotting import plot_implicit
 
 def fixed_point_2var(user_equation1, user_equation2, start_x = 0, start_y = 0, iterations = 100,stopping_error = 0, use_iter = True):
     """
@@ -131,6 +132,10 @@ def fixed_point_2var(user_equation1, user_equation2, start_x = 0, start_y = 0, i
 
     except Exception as e:
         print(f"Error: {e}")
+    p1 = plot_implicit(eqn1_sym , show=False, line_color='blue', legend=True, x_value = x, y_value = y)
+    p2 = plot_implicit(eqn2_sym , show=False, line_color='red', legend=True, x_value = x, y_value = y)
+    p1.extend(p2)
+    p1.show() 
 
     return x_val, y_val, err_rel_x, err_rel_y, conv_F, conv_G
 
@@ -219,7 +224,8 @@ def fixed_point_1var(user_equation, start_x = 0, iterations = 100, stopping_erro
 
     except Exception as e:
         print(f"Error: {e}")
-
+    p1 = plot_implicit(eqn_sym , show=False, line_color='blue', legend=True, x_value = x)
+    p1.show() 
     return x_val, err_rel_x, conv_F
 
 def fixed_point_main(user_equation1, user_equation2, start_x = 0, start_y = 0, iterations = 100,stopping_error = 0, use_iter = True, use_one_var = False):
@@ -238,35 +244,9 @@ def fixed_point_main(user_equation1, user_equation2, start_x = 0, start_y = 0, i
         output_func = fixed_point_1var(user_equation1, start_x, iterations, stopping_error, use_iter)
     else:
         output_func = fixed_point_2var(user_equation1,user_equation2, start_x, start_y,iterations, stopping_error, use_iter)
+
     return output_func
 
-def plot_eqn(user_equation1, user_equation2, use_one_var = False):
-    """
-    Plots the Given Equations
-
-    Parameters:
-    - user_equation1 & user_equation2: Equations to be plotted
-    - use_one_var: True when one-variable method is needed, false otherwise (and false by default).
-    """
-
-    x, y = symbols('x y')
-
-    if use_one_var is True:
-        # Convert both eqn into sympy expression
-        f = sympify(user_equation1)
-        plot(f, (x, -5, 5), title='Graph of f(x)', xlabel='x', ylabel='f(x)')
-    else:
-        # Convert both eqns into sympy expressions
-        f1 = sympify(user_equation1)
-        f2 = sympify(user_equation2)
-        # Plot the first and second functions
-        plot1 = plot3d(f1, (x, -0.5, 0.5), (y, -0.5, 0.5), title='Graph of f1(x,y) & f2(x,y)',
-                        xlabel='x', ylabel='y', show = False)
-        plot2 = plot3d(f2, (x, -0.5, 0.5), (y, -0.5, 0.5), title='Graph of f2(x,y)',
-                        xlabel='x', ylabel='y', show = False)
-        # Add the plot of the 2nd function to the first
-        plot1.extend(plot2)
-        plot1.show()
 
 
 # #Input Examples:

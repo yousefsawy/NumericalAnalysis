@@ -5,8 +5,11 @@ import sympy as sp
 from sympy import sympify
 from numericall import NonLinearNewton
 from NewtonRaphson import Newton
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('QtAgg')
 
-class MainWindow(QMainWindow):
+class NewtonRaphson1(QMainWindow):
     def clickediterations(self):
         self.ui.label_5.setVisible(True)
         self.ui.textEdit_5.setVisible(True)
@@ -63,6 +66,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
         app = QApplication([])
-        window = MainWindow()
+        window =NewtonRaphson1()
         window.show()
         app.exec_()

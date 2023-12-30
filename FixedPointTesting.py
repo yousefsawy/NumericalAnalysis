@@ -4,10 +4,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sympy as sp
 from sympy import sympify
-from Fixed_Point_V2 import fixed_point_main, fixed_point_1var, fixed_point_2var, plot_eqn
+from Fixed_Point_V2 import fixed_point_main, fixed_point_1var, fixed_point_2var
 from FixedPoint import FixedPoint
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+from sympy import symbols
+matplotlib.use('QtAgg')
 
-class MainWindow(QMainWindow):
+class FixedPoint1(QMainWindow):
     def clickediterations(self):
         self.ui.label_5.setVisible(True)
         self.ui.textEdit_5.setVisible(True)
@@ -29,6 +34,7 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.clickediterations)
         self.ui.pushButton_3.clicked.connect(self.clickedstoppingerror)
         self.ui.pushButton.clicked.connect(self.Get_result)
+        
 
 
 
@@ -78,15 +84,11 @@ class MainWindow(QMainWindow):
                     self.ui.textEdit_10.setText(str("NO"))
                     self.ui.textEdit_11.setText(str(output[2]))
                     self.ui.textEdit_12.setText(str("NO"))
-                plot_eqn(input1,input2,input8)
-
-
-                #self.pushButton.clicked.connect(Get_result)
 
 
 
 if __name__ == "__main__":
         app = QApplication([])
-        window = MainWindow()
+        window = FixedPoint1()
         window.show()
         app.exec_()
