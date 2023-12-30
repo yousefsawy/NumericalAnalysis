@@ -1,8 +1,13 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
+
+from Home import Ui_MainWindow
+from RichardsonExp import RichardsonExp_Control
+from Predictor import Ui_Predictor
+from DifferentialEqn import DifferentialEquationSolver
+from Lagrange_with_graph import LagrangeInterpolationCalculator
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-from Home import Ui_MainWindow
 from mplwidget import MplWidget
 from RK import RK_UI
 from LinearMatrix import Linear_UI
@@ -15,6 +20,7 @@ from newton_general import newton_general_Form
 import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
 from Simpsons13MainWindow import Ui_Simpsons13
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -28,6 +34,11 @@ class MainWindow(QMainWindow):
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
 
+        self.rich_control = RichardsonExp_Control()
+        self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
+        self.ui.pushButton_12.clicked.connect(self.OpenRich)
+        self.ui.pushButton_28.clicked.connect(self.OpenPredictor)
+        self.ui.pushButton_4.clicked.connect(self.OpenLagrange)
         self.ui.pushButton_5.clicked.connect(self.OpenNewtonGenral)
         self.ui.pushButton_3.clicked.connect(self.OpenNewtonEqui)
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
@@ -37,6 +48,23 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_9.clicked.connect(self.OpenSimpson38)
         self.ui.pushButton_2.clicked.connect(self.openCurveFitting)
         self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
+    
+    def OpenPredictor(self):
+        self.predict_window = QtWidgets.QMainWindow()
+        self.predict_Ui = Ui_Predictor()
+        self.predict_Ui.setupUi(self.predict_window)
+        self.predict_window.show()
+
+    def OpenDiff(self):
+        self.diff_window = DifferentialEquationSolver()
+        self.diff_window.show()
+
+    def OpenLagrange(self):
+        self.Lagrange_window = LagrangeInterpolationCalculator()
+        self.Lagrange_window.show()
+        
+    def OpenRich(self):
+        self.rich_control.OpenRich()
 
     def OpenTrapezoidal(self):
         if not self.trapezoidal_form:
@@ -154,7 +182,6 @@ def convert_to_function(input_string):
         return eval(input_string)
 
     return func
-
 
 
 
