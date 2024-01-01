@@ -15,13 +15,15 @@ from Trapezoidal import TrapezoidalForm
 from Simpson38 import Simpson38Form
 from Eigen import EigenForm
 import math
-from FixedPointTesting import FixedPoint1
-from NewtonRaphsonTesting import NewtonRaphson1
 from Newton_Equi import Newton_Equi_Form
 from newton_general import newton_general_Form
 from finit2 import Finite_Form
+import math
 from CurveFittingMainWindow import Ui_CurveFittingForm
 from Simpsons13MainWindow import Ui_Simpsons13
+
+from Euler import DifferentialEquationSolver
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -35,8 +37,7 @@ class MainWindow(QMainWindow):
         self.OpenHome()
         self.canvas = self.ui.widget.canvas
         self.figure = self.canvas.figure
-        self.ui.pushButton_26.clicked.connect(self.OpenNewtonRaphson)
-        self.ui.pushButton_25.clicked.connect(self.OpenFixedPoint)
+        
         self.rich_control = RichardsonExp_Control()
         self.ui.pushButton_42.clicked.connect(self.VerifyFunc)
         self.ui.pushButton_12.clicked.connect(self.OpenRich)
@@ -53,6 +54,8 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_6.clicked.connect(self.openSimpsons13)
         self.ui.pushButton_48.clicked.connect(self.openEigenProblem)
         self.ui.pushButton_11.clicked.connect(self.OpenFinite)
+        self.ui.pushButton_29.clicked.connect(self.OpenEuler)
+
     
     def openEigenProblem(self):
         self.eigen_form = EigenForm()
@@ -103,12 +106,12 @@ class MainWindow(QMainWindow):
         self.FiniteUI.setupUi(self.FiniteWindow)
         self.FiniteWindow.show()
 
-    def OpenFixedPoint(self):
-        self.FixedPoint1_window=FixedPoint1()
-        self.FixedPoint1_window.show()
-    def OpenNewtonRaphson(self):
-        self.NewtonRaphson_window=NewtonRaphson1()
-        self.NewtonRaphson_window.show()
+
+    def OpenEuler(self):
+        self.EulerUI = DifferentialEquationSolver()  # Create an instance of your custom window
+        self.EulerUI.init_ui()  # Initialize the UI of DifferentialEquationSolver
+        self.EulerUI.show()  # Show the DifferentialEquationSolver window
+
 
     def VerifyFunc(self):
         start = self.ui.textEdit_3.toPlainText()
