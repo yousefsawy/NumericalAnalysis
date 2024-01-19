@@ -1,1 +1,21 @@
-![Screenshot 2024-01-19 154646](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/6feae36e-64da-414b-9184-37184eaf134b)
+# Numerical Analysis
+
+Numerical Analysis MTHS114 Course Project at Cairo University Faculty of Engineering.
+
+The software can provide solutions to complex mathematical problems using numerical analysis. The available problems are: 
+
+
+
+
+
+## Installation
+
+Run the following to install PyQt5, MatPlotLib, SciPy
+
+```bash
+pip install PyQt5
+pip install MatPlotLib
+pip install scipy
+pip install sympy
+
+```
