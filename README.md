@@ -14,8 +14,9 @@ The software can provide solutions to complex mathematical problems using numeri
 8. Partial Differential Equations
 9. Eigen Value Problem
 
+![Screenshot 2024-01-19 154646](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/c757e47b-ebb0-4be0-a31c-c40702cda3eb)
 
-![Screenshot 2024-01-19 154646](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/f7108f8a-a50e-45b0-939d-b124cace04df)
+
 
 ## Installation
 
@@ -28,3 +29,15 @@ pip install scipy
 pip install sympy
 
 ```
+
+## Usage
+
+1. Choose the problem you want to solve
+   
+![Screenshot 2024-01-19 155654](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/66a40482-a2f6-4450-a770-4b8d3f173d1b)
+
+3. Enter the required input and then calculate or graph the output
+   
+![Screenshot 2024-01-19 155929](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/df4f8e53-60c3-473e-b671-c7010517fd1a)
+
+   
