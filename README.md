@@ -36,7 +36,7 @@ pip install sympy
    
 ![Screenshot 2024-01-19 155654](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/66a40482-a2f6-4450-a770-4b8d3f173d1b)
 
-3. Enter the required input and then calculate or graph the output
+2. Enter the required input and then calculate or graph the output
    
 ![Screenshot 2024-01-19 161002](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/615ece88-b41f-4cb2-89a4-88e1bb70a8bc)
 
