@@ -38,7 +38,8 @@ pip install sympy
 
 2. Enter the required input and then calculate or graph the output
    
-![Screenshot 2024-01-19 161002](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/615ece88-b41f-4cb2-89a4-88e1bb70a8bc)
+![298092852-615ece88-b41f-4cb2-89a4-88e1bb70a8bc](https://github.com/yousefsawy/NumericalAnalysis/assets/99139949/3c3ea195-81be-47c7-885b-a55869d6b571)
+
 
 
    
